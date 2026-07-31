@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  # Banco de dados Relacional (PostgreSQL)
+  postgres:
+    image: postgres:15
+    container_name: ecommerce_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_DB: ecommerce_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Banco de dados NoSQL (MongoDB)
+  mongodb:
+    image: mongo:6
+    container_name: ecommerce_mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+# Definição dos volumes para persistir os dados
+volumes:
+  postgres_data:
+  mongo_data:
